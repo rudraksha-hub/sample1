@@ -811,7 +811,7 @@
         </a>
         <p class="nav__tagline">Premium Pet Grooming</p>
       </div>
-      <a href="index1.html" class="back-btn"
+      <a href="index.html" class="back-btn"
         ><i class="fas fa-arrow-left"></i> Back to Home</a
       >
     </nav>
@@ -1203,6 +1203,7 @@
 
     document.getElementById('bookingForm').addEventListener('submit', function (e) {
       e.preventDefault();
+      console.log("is this working");
       
       let isFormValid = true;
       const requiredFields = this.querySelectorAll('input[required], select[required], textarea[required]');
@@ -1277,6 +1278,136 @@
         }
       });
     });
-  </script>
-</body>
-</html>
+   // [Keep all your existing functions until the form submission handler]
+
+document.getElementById('bookingForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  
+  let isFormValid = true;
+  const requiredFields = this.querySelectorAll('input[required], select[required], textarea[required]');
+  
+  // Validate all required fields
+  requiredFields.forEach((field) => {
+    if (!validateField(field)) isFormValid = false;
+  });
+
+  // Check service selection
+  if (!this.querySelector('input[name="service"]:checked')) {
+    isFormValid = false;
+    showFieldError(document.querySelector('.service-options'), 'Please select a service');
+    document.querySelector('.service-options').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  // Check pet size selection
+  if (!this.querySelector('input[name="petSize"]:checked')) {
+    isFormValid = false;
+    showFieldError(document.querySelector('.size-options'), 'Please select your pet size');
+    document.querySelector('.size-options').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  if (!isFormValid) {
+    alert('Please fill in all required fields correctly');
+    return;
+  }
+
+  const submitBtn = document.querySelector('.submit-btn');
+  const originalText = submitBtn.innerHTML;
+  
+  // Show loading state
+  submitBtn.innerHTML = '<i class="fas fa-spinner loading"></i> Submitting...';
+  submitBtn.disabled = true;
+  submitBtn.style.animation = 'pulse 1s infinite';
+
+  // Collect form data
+  const formData = {
+    ownerName: this.ownerName.value.trim(),
+    phone: this.phone.value.trim(),
+    email: this.email.value.trim(),
+    whatsapp: this.whatsapp.value.trim(),
+    address: this.address.value.trim(),
+    petName: this.petName.value.trim(),
+    petType: this.petType.options[this.petType.selectedIndex].text,
+    breed: this.breed.value.trim(),
+    age: this.age.value.trim(),
+    petSize: this.querySelector('input[name="petSize"]:checked').value,
+    specialNeeds: this.specialNeeds.value.trim(),
+    service: this.querySelector('input[name="service"]:checked').parentNode.querySelector('.service-name').textContent.trim(),
+    serviceNotes: this.serviceNotes.value.trim(),
+    preferredDate: this.preferredDate.value,
+    preferredTime: this.preferredTime.options[this.preferredTime.selectedIndex].text,
+    alternateDate: this.alternateDate.value || 'Not specified'
+  };
+
+  // Send to WhatsApp
+  try {
+    sendToWhatsApp(formData);
+    
+    // Show success message
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.add('show');
+    successMessage.style.animation = 'fadeInDown 0.8s ease-out, pulse 2s infinite 1s';
+    
+    // Reset form
+    this.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Reset selected states
+    document.querySelectorAll('.selected').forEach((el) => {
+      el.classList.remove('selected');
+      el.style.transform = 'scale(1)';
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('There was an error submitting your booking. Please try again or call us directly.');
+  } finally {
+    // Reset button state
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+    submitBtn.style.animation = '';
+    
+    // Hide success message after delay
+    if (document.getElementById('successMessage').classList.contains('show')) {
+      setTimeout(() => {
+        document.getElementById('successMessage').classList.remove('show');
+      }, 10000);
+    }
+  }
+});
+
+function sendToWhatsApp(formData) {
+  // Format the WhatsApp message
+  let message = `*New Pet Grooming Booking Request*%0A%0A`;
+  message += `*Owner Information*%0A`;
+  message += `Name: ${formData.ownerName}%0A`;
+  message += `Phone: ${formData.phone}%0A`;
+  message += `Email: ${formData.email || 'Not provided'}%0A`;
+  message += `WhatsApp: ${formData.whatsapp || formData.phone}%0A`;
+  message += `Address: ${formData.address}%0A%0A`;
+  
+  message += `*Pet Details*%0A`;
+  message += `Name: ${formData.petName}%0A`;
+  message += `Type: ${formData.petType}%0A`;
+  message += `Breed: ${formData.breed || 'Not specified'}%0A`;
+  message += `Age: ${formData.age || 'Not specified'}%0A`;
+  message += `Size: ${formData.petSize}%0A`;
+  message += `Special Needs: ${formData.specialNeeds || 'None'}%0A%0A`;
+  
+  message += `*Service Requested*%0A`;
+  message += `${formData.service}%0A`;
+  message += `Notes: ${formData.serviceNotes || 'None'}%0A%0A`;
+  
+  message += `*Appointment Time*%0A`;
+  message += `Preferred: ${formData.preferredDate} at ${formData.preferredTime}%0A`;
+  message += `Alternate Date: ${formData.alternateDate}`;
+
+  // Use your WhatsApp business number (country code + number without '+' or '0')
+  const whatsappNumber = '917901915646'; // Replace with your actual number
+  
+  // Create WhatsApp URL
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  
+  // Open in new window
+  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+}
