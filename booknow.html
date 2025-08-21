@@ -3,95 +3,1472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Grooming Booking</title>
+    <title>Pet Grooming Booking | Cuddles n Bubbles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Simplified CSS Variables - Only Orange & Sky Blue */
+        :root {
+            --pet-orange: #FF7F50;
+            --pet-orange-light: #FFA07A;
+            --pet-orange-dark: #FF6347;
+            --pet-sky-blue: #87CEEB;
+            --pet-sky-blue-light: #B0E0E6;
+            --pet-sky-blue-dark: #4682B4;
+            --pet-white: #FFFFFF;
+            --pet-cream: #FFFEF7;
+            --pet-dark: #2F4F4F;
+            --pet-gray-light: #F8F9FA;
+            --pet-green: #28a745;
+            --pet-red: #dc3545;
+            
+            --color-primary: var(--pet-orange);
+            --color-secondary: var(--pet-sky-blue);
+            --color-surface: var(--pet-white);
+            --color-text: var(--pet-dark);
+            --color-success: var(--pet-green);
+            --color-error: var(--pet-red);
+            
+            --gradient-primary: linear-gradient(135deg, var(--pet-orange) 0%, var(--pet-orange-light) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--pet-sky-blue) 0%, var(--pet-sky-blue-light) 100%);
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 2px 8px rgba(0,0,0,0.12);
+            --shadow-lg: 0 4px 15px rgba(0,0,0,0.15);
+            
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--pet-cream) 0%, rgba(255, 127, 80, 0.05) 100%);
+            color: var(--color-text);
+            min-height: 100vh;
+            padding: var(--space-md);
+            line-height: 1.5;
+            font-size: 14px;
         }
-        .container {
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+        .main-container {
+            max-width: 900px;
+            margin: var(--space-lg) auto;
+            animation: fadeInUp 0.6s ease-out;
         }
-        .form-group {
-            margin-bottom: 20px;
+
+        .booking-container {
+            background: var(--color-surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
         }
-        label {
-            display: block;
-            margin-bottom: 10px;
+
+        .booking-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
-        input[type="text"], input[type="tel"], input[type="email"], input[type="date"], input[type="time"] {
-            width: 100%;
-            height: 40px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, rgba(255, 127, 80, 0.05) 0%, rgba(135, 206, 235, 0.05) 100%);
         }
-        button[type="submit"] {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            color: var(--color-primary);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            margin-right: var(--space-sm);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            color: var(--color-secondary);
+            font-style: italic;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .header h2 {
+            color: var(--color-text);
+            font-size: 1.4rem;
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+        }
+
+        .header p:last-child {
+            opacity: 0.8;
+            font-size: 0.85rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: var(--space-lg);
+            background: var(--color-surface);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-title h3 {
+            color: var(--color-text);
+            font-size: 1.3rem;
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+        }
+
+        .section-title p {
+            color: var(--color-text);
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* Combo Section */
+        .combo-section {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--gradient-secondary);
+            border-radius: var(--radius-lg);
+            position: relative;
+        }
+
+        .combo-title {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+        }
+
+        .combo-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .combo-category {
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            border: 2px solid var(--color-secondary);
+            transition: all var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .combo-category:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .combo-header {
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .combo-pet-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto var(--space-sm);
+            border: 3px solid var(--color-secondary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .combo-category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--space-xs);
+        }
+
+        .combo-size-note {
+            color: var(--color-secondary);
+            font-weight: 500;
+            font-size: 0.75rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .combo-items {
+            display: grid;
+            gap: var(--space-sm);
+        }
+
+        .combo-item {
+            background: linear-gradient(135deg, rgba(135, 206, 235, 0.1) 0%, rgba(135, 206, 235, 0.05) 100%);
+            border: 2px solid var(--color-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
             cursor: pointer;
+            transition: all var(--transition);
+            position: relative;
         }
-        button[type="submit"]:hover {
-            background-color: #3e8e41;
+
+        .combo-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .combo-item.selected {
+            background: var(--color-secondary);
+            color: white;
+            transform: scale(1.03);
+        }
+
+        .combo-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .combo-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .combo-discount {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .combo-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .combo-price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+        }
+
+        .combo-item.selected .combo-price {
+            color: white;
+        }
+
+        .original-price {
+            font-size: 0.8rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: var(--space-xs);
+        }
+
+        .combo-checkbox {
+            position: absolute;
+            right: var(--space-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-secondary);
+            border-radius: 50%;
+            background: var(--color-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            opacity: 0;
+        }
+
+        .combo-item:hover .combo-checkbox,
+        .combo-item.selected .combo-checkbox {
+            opacity: 1;
+        }
+
+        .combo-item.selected .combo-checkbox {
+            background: white;
+            color: var(--color-secondary);
+        }
+
+        /* Pet Categories */
+        .pet-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .pet-category {
+            background: var(--pet-gray-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            border: 2px solid transparent;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pet-category:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-secondary);
+        }
+
+        .category-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .category-pet-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: var(--space-sm);
+            border: 3px solid var(--color-secondary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-align: center;
+        }
+
+        /* Service Items */
+        .service-items {
+            display: grid;
+            gap: var(--space-sm);
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--color-surface);
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            transition: all var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .service-item:hover {
+            border-color: var(--color-secondary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-item.selected {
+            border-color: var(--color-primary);
+            background: rgba(255, 127, 80, 0.1);
+            transform: translateX(4px);
+        }
+
+        .service-name {
+            font-weight: 500;
+            color: var(--color-text);
+            font-size: 0.85rem;
+        }
+
+        .service-price {
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+        }
+
+        .service-checkbox {
+            position: absolute;
+            right: var(--space-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--color-primary);
+            border-radius: 50%;
+            background: var(--color-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            opacity: 0;
+        }
+
+        .service-item:hover .service-checkbox,
+        .service-item.selected .service-checkbox {
+            opacity: 1;
+        }
+
+        .service-item.selected .service-checkbox {
+            background: var(--color-primary);
+            color: var(--color-surface);
+        }
+
+        .service-checkbox i {
+            font-size: 0.7rem;
+        }
+
+        /* Summary */
+        .selected-summary {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+            border: 2px solid var(--color-success);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+            display: none;
+        }
+
+        .summary-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .summary-header i {
+            color: var(--color-success);
+            font-size: 1.2rem;
+            margin-right: var(--space-sm);
+        }
+
+        .summary-header h4 {
+            color: var(--color-text);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .summary-items {
+            display: grid;
+            gap: var(--space-xs);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-primary);
+            border-top: 2px solid var(--color-primary);
+            padding-top: var(--space-sm);
+            margin-top: var(--space-sm);
+        }
+
+        .total-savings {
+            color: var(--color-success);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: var(--space-sm);
+            text-align: center;
+            background: rgba(40, 167, 69, 0.1);
+            padding: var(--space-xs);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Form */
+        .form-section {
+            padding: var(--space-lg);
+            background: var(--pet-gray-light);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+            color: var(--color-text);
+            font-size: 0.85rem;
+        }
+
+        label i {
+            margin-right: var(--space-xs);
+            color: var(--color-primary);
+            width: 14px;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], 
+        input[type="tel"], 
+        input[type="email"], 
+        input[type="date"], 
+        input[type="time"],
+        textarea {
+            width: 100%;
+            padding: var(--space-sm);
+            font-size: 0.85rem;
+            font-family: 'Poppins', sans-serif;
+            border: 1px solid #e1e5e9;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            min-height: 36px;
+        }
+
+        textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(255, 127, 80, 0.1);
+            outline: none;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--space-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .submit-button i {
+            margin-right: var(--space-xs);
+            font-size: 0.9rem;
+        }
+
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+            border: 2px solid var(--color-success);
+            border-radius: var(--radius-md);
+            margin: var(--space-md);
+        }
+
+        .confirmation i {
+            font-size: 2.5rem;
+            color: var(--color-success);
+            margin-bottom: var(--space-sm);
+        }
+
+        .confirmation h3 {
+            color: var(--color-text);
+            margin-bottom: var(--space-xs);
+            font-size: 1.2rem;
+        }
+
+        .error {
+            border-color: var(--color-error) !important;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1) !important;
+        }
+
+        .error-message {
+            color: var(--color-error);
+            font-size: 0.75rem;
+            margin-top: var(--space-xs);
+            display: none;
+        }
+
+        .back-home {
+            text-align: center;
+            padding: var(--space-md);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            background: var(--pet-gray-light);
+        }
+
+        .back-home a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin: var(--space-sm) auto;
+            }
+            
+            .pet-categories,
+            .combo-categories {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+
+            .combo-pet-image,
+            .category-pet-image {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: var(--space-xs);
+                font-size: 13px;
+            }
+            
+            .header,
+            .services-section,
+            .form-section,
+            .combo-section {
+                padding: var(--space-md);
+            }
+            
+            .pet-category,
+            .combo-category {
+                padding: var(--space-md);
+            }
+            
+            .service-item,
+            .combo-item {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-xs);
+            }
+
+            .service-checkbox,
+            .combo-checkbox {
+                position: static;
+                transform: none;
+                margin-top: var(--space-xs);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Pet Grooming Booking</h2>
-        <form id="booking-form">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+    <div class="main-container">
+        <div class="booking-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                    <div class="logo-text">CUDDLES N' BUBBLES</div>
+                </div>
+                <p class="tagline">Premium Pet Grooming Experience</p>
+                <h2>Book Your Pet's Spa Day</h2>
+                <p>Choose services for dogs and cats - fill out the form to request an appointment</p>
             </div>
-            <div class="form-group">
-                <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required>
+
+            <!-- Services Selection -->
+            <div class="services-section">
+                <div class="section-title">
+                    <h3><i class="fas fa-spa"></i> Select Grooming Services</h3>
+                    <p>Choose combo offers for maximum savings or individual services</p>
+                </div>
+
+                <!-- Combined Combo Offers Section -->
+                <div class="combo-section">
+                    <h3 class="combo-title">🎉 SPECIAL COMBO DEALS - SAVE BIG! 🎉</h3>
+                    <div class="combo-categories">
+                        <!-- Small Dogs Combos -->
+                        <div class="combo-category">
+                            <div class="combo-header">
+                                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Small Dog" class="combo-pet-image">
+                                <h4 class="combo-category-title">Small Dogs</h4>
+                                <p class="combo-size-note">For Chihuahuas, Yorkies, Pugs & similar breeds</p>
+                            </div>
+                            <div class="combo-items">
+                                <div class="combo-item" data-service="hair-bath-combo-small" data-price="1200" data-savings="400">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Hair + Bath Combo</div>
+                                        <div class="combo-discount">₹400 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,200 <span class="original-price">₹1,600</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                                <div class="combo-item" data-service="full-grooming-combo-small" data-price="1600" data-savings="600">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Full Grooming Combo</div>
+                                        <div class="combo-discount">₹600 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,600 <span class="original-price">₹2,200</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medium Dogs Combos -->
+                        <div class="combo-category">
+                            <div class="combo-header">
+                                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Medium Dog" class="combo-pet-image">
+                                <h4 class="combo-category-title">Medium Dogs</h4>
+                                <p class="combo-size-note">For Golden Retrievers, Labradors & similar breeds</p>
+                            </div>
+                            <div class="combo-items">
+                                <div class="combo-item" data-service="hair-bath-combo-medium" data-price="1300" data-savings="500">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Hair + Bath Combo</div>
+                                        <div class="combo-discount">₹500 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,300 <span class="original-price">₹1,800</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                                <div class="combo-item" data-service="full-grooming-combo-medium" data-price="1700" data-savings="700">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Full Grooming Combo</div>
+                                        <div class="combo-discount">₹700 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,700 <span class="original-price">₹2,400</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Large Dogs Combos -->
+                        <div class="combo-category">
+                            <div class="combo-header">
+                                <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Large Dog" class="combo-pet-image">
+                                <h4 class="combo-category-title">Large Dogs</h4>
+                                <p class="combo-size-note">For German Shepherds, Great Danes & similar breeds</p>
+                            </div>
+                            <div class="combo-items">
+                                <div class="combo-item" data-service="hair-bath-combo-large" data-price="1400" data-savings="600">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Hair + Bath Combo</div>
+                                        <div class="combo-discount">₹600 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,400 <span class="original-price">₹2,000</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                                <div class="combo-item" data-service="full-grooming-combo-large" data-price="1800" data-savings="800">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Full Grooming Combo</div>
+                                        <div class="combo-discount">₹800 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,800 <span class="original-price">₹2,600</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cat Combo -->
+                        <div class="combo-category">
+                            <div class="combo-header">
+                                <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cat" class="combo-pet-image">
+                                <h4 class="combo-category-title">🐱 Cats</h4>
+                                <p class="combo-size-note">Complete grooming package for all cats</p>
+                            </div>
+                            <div class="combo-items">
+                                <div class="combo-item" data-service="full-grooming-combo-cat" data-price="1600" data-savings="250">
+                                    <div class="combo-item-header">
+                                        <div class="combo-name">Full Grooming Package</div>
+                                        <div class="combo-discount">₹250 OFF</div>
+                                    </div>
+                                    <div class="combo-pricing">
+                                        <div class="combo-price">₹1,600 <span class="original-price">₹1,850</span></div>
+                                    </div>
+                                    <div class="combo-checkbox"><i class="fas fa-check"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <h3><i class="fas fa-scissors"></i> Individual Services</h3>
+                    <p>Select individual services based on your pet's needs</p>
+                </div>
+
+                <div class="pet-categories">
+                    <!-- Small Dogs -->
+                    <div class="pet-category">
+                        <div class="category-header">
+                            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Small Dog" class="category-pet-image">
+                            <div class="category-title">Small Dogs</div>
+                        </div>
+                        <div class="service-items">
+                            <div class="service-item" data-service="regular-bath-small" data-price="800">
+                                <div class="service-name">Regular Bath</div>
+                                <div class="service-price">₹800</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="medical-bath-small" data-price="1000">
+                                <div class="service-name">Medical Bath</div>
+                                <div class="service-price">₹1,000</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="aroma-spa-small" data-price="1100">
+                                <div class="service-name">Aroma Spa</div>
+                                <div class="service-price">₹1,100</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tick-removal-small" data-price="300">
+                                <div class="service-name">Tick Removal</div>
+                                <div class="service-price">₹300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="ear-cleaning-small" data-price="100">
+                                <div class="service-name">Ear Cleaning</div>
+                                <div class="service-price">₹100</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tooth-cleaning-small" data-price="150">
+                                <div class="service-name">Tooth Cleaning</div>
+                                <div class="service-price">₹150</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="nail-cut-small" data-price="150">
+                                <div class="service-name">Nail Cut/Grinding</div>
+                                <div class="service-price">₹150</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="hygiene-cut-small" data-price="300">
+                                <div class="service-name">Hygiene Cut</div>
+                                <div class="service-price">₹300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medium Dogs -->
+                    <div class="pet-category">
+                        <div class="category-header">
+                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Medium Dog" class="category-pet-image">
+                            <div class="category-title">Medium Dogs</div>
+                        </div>
+                        <div class="service-items">
+                            <div class="service-item" data-service="regular-bath-medium" data-price="900">
+                                <div class="service-name">Regular Bath</div>
+                                <div class="service-price">₹900</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="medical-bath-medium" data-price="1100">
+                                <div class="service-name">Medical Bath</div>
+                                <div class="service-price">₹1,100</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="aroma-spa-medium" data-price="1200">
+                                <div class="service-name">Aroma Spa</div>
+                                <div class="service-price">₹1,200</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tick-removal-medium" data-price="300">
+                                <div class="service-name">Tick Removal</div>
+                                <div class="service-price">₹300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="ear-cleaning-medium" data-price="100">
+                                <div class="service-name">Ear Cleaning</div>
+                                <div class="service-price">₹100</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tooth-cleaning-medium" data-price="150">
+                                <div class="service-name">Tooth Cleaning</div>
+                                <div class="service-price">₹150</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="nail-cut-medium" data-price="150">
+                                <div class="service-name">Nail Cut/Grinding</div>
+                                <div class="service-price">₹150</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="hygiene-cut-medium" data-price="350">
+                                <div class="service-name">Hygiene Cut</div>
+                                <div class="service-price">₹350</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Large Dogs -->
+                    <div class="pet-category">
+                        <div class="category-header">
+                            <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Large Dog" class="category-pet-image">
+                            <div class="category-title">Large Dogs</div>
+                        </div>
+                        <div class="service-items">
+                            <div class="service-item" data-service="regular-bath-large" data-price="1200">
+                                <div class="service-name">Regular Bath</div>
+                                <div class="service-price">₹1,200</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="medical-bath-large" data-price="1300">
+                                <div class="service-name">Medical Bath</div>
+                                <div class="service-price">₹1,300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="aroma-spa-large" data-price="1600">
+                                <div class="service-name">Aroma Spa</div>
+                                <div class="service-price">₹1,600</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tick-removal-large" data-price="400">
+                                <div class="service-name">Tick Removal</div>
+                                <div class="service-price">₹400</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="ear-cleaning-large" data-price="50">
+                                <div class="service-name">Ear Cleaning</div>
+                                <div class="service-price">₹50</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tooth-cleaning-large" data-price="200">
+                                <div class="service-name">Tooth Cleaning</div>
+                                <div class="service-price">₹200</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="nail-cut-large" data-price="150">
+                                <div class="service-name">Nail Cut/Grinding</div>
+                                <div class="service-price">₹150</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="hygiene-cut-large" data-price="300">
+                                <div class="service-name">Hygiene Cut</div>
+                                <div class="service-price">₹300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cats -->
+                    <div class="pet-category">
+                        <div class="category-header">
+                            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cat" class="category-pet-image">
+                            <div class="category-title">🐱 Cats</div>
+                        </div>
+                        <div class="service-items">
+                            <div class="service-item" data-service="regular-bath-cat" data-price="800">
+                                <div class="service-name">Regular Bath</div>
+                                <div class="service-price">₹800</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="medical-bath-cat" data-price="1000">
+                                <div class="service-name">Medical Bath</div>
+                                <div class="service-price">₹1,000</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="aroma-spa-cat" data-price="1100">
+                                <div class="service-name">Aroma Spa</div>
+                                <div class="service-price">₹1,100</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tick-removal-cat" data-price="300">
+                                <div class="service-name">Tick Removal</div>
+                                <div class="service-price">₹300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="ear-cleaning-cat" data-price="100">
+                                <div class="service-name">Ear Cleaning</div>
+                                <div class="service-price">₹100</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="tooth-cleaning-cat" data-price="150">
+                                <div class="service-name">Tooth Cleaning</div>
+                                <div class="service-price">₹150</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="hair-cut-cat" data-price="500">
+                                <div class="service-name">Hair Cut</div>
+                                <div class="service-price">₹500</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                            <div class="service-item" data-service="nail-cut-cat" data-price="300">
+                                <div class="service-name">Nail Cut/Grinding</div>
+                                <div class="service-price">₹300</div>
+                                <div class="service-checkbox"><i class="fas fa-check"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Services Summary -->
+                <div class="selected-summary" id="selectedSummary">
+                    <div class="summary-header">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h4>Selected Services</h4>
+                    </div>
+                    <div class="summary-items" id="summaryItems">
+                        <!-- Selected services will appear here -->
+                    </div>
+                    <div class="total-savings" id="totalSavings" style="display: none;">
+                        🎉 You're saving: ₹<span id="savingsAmount">0</span> with combo offers!
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+
+            <!-- Booking Form -->
+            <div class="form-section">
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> Your Name:</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        <div class="error-message" id="name-error">Please enter your name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Your phone number">
+                        <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="Your email address">
+                        <div class="error-message" id="email-error">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pet-name"><i class="fas fa-paw"></i> Pet's Name:</label>
+                        <input type="text" id="pet-name" name="pet-name" required placeholder="What's your pet's name?">
+                        <div class="error-message" id="pet-name-error">Please enter your pet's name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pet-breed"><i class="fas fa-dna"></i> Pet Breed (Optional):</label>
+                        <input type="text" id="pet-breed" name="pet-breed" placeholder="e.g., Golden Retriever, Persian Cat">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date"><i class="fas fa-calendar"></i> Preferred Date:</label>
+                        <input type="date" id="date" name="date" required>
+                        <div class="error-message" id="date-error">Please select a preferred date</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time"><i class="fas fa-clock"></i> Preferred Time:</label>
+                        <input type="time" id="time" name="time" required>
+                        <div class="error-message" id="time-error">Please select a preferred time</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes"><i class="fas fa-sticky-note"></i> Additional Notes (Optional):</label>
+                        <textarea id="notes" name="notes" placeholder="Any special requirements or notes about your pet"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-paper-plane"></i> Book Appointment
+                    </button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="pet-name">Pet Name:</label>
-                <input type="text" id="pet-name" name="pet-name" required>
+
+            <!-- Confirmation Message -->
+            <div class="confirmation" id="confirmation">
+                <i class="fas fa-check-circle"></i>
+                <h3>Booking Request Sent!</h3>
+                <p>We'll contact you shortly to confirm your appointment details and selected services.</p>
             </div>
-            <div class="form-group">
-                <label for="date">Preferred Date:</label>
-                <input type="date" id="date" name="date" required>
+
+            <!-- Back to Home -->
+            <div class="back-home">
+                <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
             </div>
-            <div class="form-group">
-                <label for="time">Preferred Time:</label>
-                <input type="time" id="time" name="time" required>
-            </div>
-            <button type="submit">Book Now</button>
-        </form>
+        </div>
     </div>
 
     <script>
-        const form = document.getElementById('booking-form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const petName = document.getElementById('pet-name').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            
-            const message = `New Booking Request%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0APet Name: ${petName}%0ADate: ${date}%0ATime: ${time}`;
-            const whatsappNumber = '917901915646'; // Replace with your WhatsApp number
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+        // Global variables
+        let selectedServices = [];
+        let totalPrice = 0;
+        let totalSavings = 0;
+
+        // Initialize the booking form
+        document.addEventListener('DOMContentLoaded', function() {
+            initBookingForm();
         });
+
+        function initBookingForm() {
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
+            
+            // Initialize service selection
+            initServiceSelection();
+            
+            // Initialize form submission
+            initFormSubmission();
+            
+            // Initialize form validation
+            initFormValidation();
+        }
+
+        function initServiceSelection() {
+            const serviceItems = document.querySelectorAll('.service-item');
+            const comboItems = document.querySelectorAll('.combo-item');
+            
+            serviceItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    toggleService(this);
+                });
+            });
+
+            comboItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    toggleCombo(this);
+                });
+            });
+        }
+
+        function toggleService(serviceElement) {
+            const serviceName = serviceElement.querySelector('.service-name').textContent.trim();
+            const serviceId = serviceElement.getAttribute('data-service');
+            const servicePrice = parseInt(serviceElement.getAttribute('data-price'));
+            
+            if (serviceElement.classList.contains('selected')) {
+                // Remove service
+                serviceElement.classList.remove('selected');
+                selectedServices = selectedServices.filter(service => service.id !== serviceId);
+                totalPrice -= servicePrice;
+            } else {
+                // Add service
+                serviceElement.classList.add('selected');
+                selectedServices.push({
+                    id: serviceId,
+                    name: serviceName,
+                    price: servicePrice,
+                    combo: false,
+                    savings: 0
+                });
+                totalPrice += servicePrice;
+            }
+            
+            updateSelectedSummary();
+        }
+
+        function toggleCombo(comboElement) {
+            const serviceName = comboElement.querySelector('.combo-name').textContent.trim();
+            const serviceId = comboElement.getAttribute('data-service');
+            const servicePrice = parseInt(comboElement.getAttribute('data-price'));
+            const serviceSavings = parseInt(comboElement.getAttribute('data-savings'));
+            
+            if (comboElement.classList.contains('selected')) {
+                // Remove combo
+                comboElement.classList.remove('selected');
+                selectedServices = selectedServices.filter(service => service.id !== serviceId);
+                totalPrice -= servicePrice;
+                totalSavings -= serviceSavings;
+            } else {
+                // Add combo
+                comboElement.classList.add('selected');
+                selectedServices.push({
+                    id: serviceId,
+                    name: serviceName,
+                    price: servicePrice,
+                    combo: true,
+                    savings: serviceSavings
+                });
+                totalPrice += servicePrice;
+                totalSavings += serviceSavings;
+            }
+            
+            updateSelectedSummary();
+        }
+
+        function updateSelectedSummary() {
+            const summaryContainer = document.getElementById('selectedSummary');
+            const summaryItems = document.getElementById('summaryItems');
+            const totalSavingsElement = document.getElementById('totalSavings');
+            const savingsAmountElement = document.getElementById('savingsAmount');
+            
+            if (selectedServices.length === 0) {
+                summaryContainer.style.display = 'none';
+                return;
+            }
+            
+            summaryContainer.style.display = 'block';
+            
+            let summaryHTML = '';
+            selectedServices.forEach(service => {
+                summaryHTML += `
+                    <div class="summary-item">
+                        <span>${service.name}${service.combo ? ' (COMBO - Save ₹' + service.savings + ')' : ''}</span>
+                        <span>₹${service.price}</span>
+                    </div>
+                `;
+            });
+            
+            summaryHTML += `
+                <div class="summary-item">
+                    <span>Total Amount</span>
+                    <span>₹${totalPrice}</span>
+                </div>
+            `;
+            
+            summaryItems.innerHTML = summaryHTML;
+
+            // Show total savings if there are combo offers
+            if (totalSavings > 0) {
+                totalSavingsElement.style.display = 'block';
+                savingsAmountElement.textContent = totalSavings;
+            } else {
+                totalSavingsElement.style.display = 'none';
+            }
+        }
+
+        function initFormValidation() {
+            const inputs = document.querySelectorAll('input[required], select[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('error')) {
+                        validateField(this);
+                    }
+                });
+            });
+        }
+
+        function validateField(field) {
+            const fieldId = field.id;
+            let isValid = true;
+            
+            if (!field.value.trim()) {
+                showError(fieldId, `Please enter ${field.previousElementSibling.textContent.replace(':', '').toLowerCase()}`);
+                isValid = false;
+            } else {
+                // Specific validations
+                if (field.type === 'email' && !isValidEmail(field.value)) {
+                    showError(fieldId, 'Please enter a valid email address');
+                    isValid = false;
+                } else if (field.type === 'tel' && !isValidPhone(field.value)) {
+                    showError(fieldId, 'Please enter a valid phone number');
+                    isValid = false;
+                } else {
+                    hideError(fieldId);
+                }
+            }
+            
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            return phoneRegex.test(phone.replace(/\s+/g, ''));
+        }
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + '-error');
+            
+            field.classList.add('error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+
+        function hideError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + '-error');
+            
+            field.classList.remove('error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }
+
+        function initFormSubmission() {
+            const form = document.getElementById('booking-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Check if services are selected
+                if (selectedServices.length === 0) {
+                    alert('Please select at least one grooming service before booking.');
+                    document.querySelector('.services-section').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                // Validate the form
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Get form data
+                const formData = getFormData();
+                
+                // Show confirmation
+                showConfirmation();
+                
+                // Send booking request
+                sendBookingRequest(formData);
+            });
+        }
+
+        function validateForm() {
+            let isValid = true;
+            
+            // Validate all required fields
+            const requiredFields = document.querySelectorAll('input[required], select[required]');
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+
+        function getFormData() {
+            return {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                petName: document.getElementById('pet-name').value,
+                petBreed: document.getElementById('pet-breed').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                notes: document.getElementById('notes').value,
+                selectedServices: selectedServices,
+                totalPrice: totalPrice,
+                totalSavings: totalSavings
+            };
+        }
+
+        function showConfirmation() {
+            const form = document.querySelector('.form-section');
+            const services = document.querySelector('.services-section');
+            const confirmation = document.getElementById('confirmation');
+            
+            form.style.display = 'none';
+            services.style.display = 'none';
+            confirmation.style.display = 'block';
+            
+            // Scroll to confirmation
+            confirmation.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function sendBookingRequest(formData) {
+            // Format the date for display
+            const formattedDate = new Date(formData.date).toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Format time to 12-hour format
+            const timeFormatted = new Date(`2000-01-01 ${formData.time}`).toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+
+            // Format selected services
+            let servicesText = '';
+            formData.selectedServices.forEach(service => {
+                servicesText += `• ${service.name}${service.combo ? ' (COMBO - Saved ₹' + service.savings + ')' : ''} - ₹${service.price}%0A`;
+            });
+            
+            let savingsText = '';
+            if (formData.totalSavings > 0) {
+                savingsText = `%0A🎉 *Total Savings: ₹${formData.totalSavings}* 🎉%0A`;
+            }
+            
+            const message = `🐾 *New Booking Request from Cuddles n Bubbles*%0A%0A*Customer Information*%0AName: ${formData.name}%0APhone: ${formData.phone}%0AEmail: ${formData.email}%0A%0A*Pet Information*%0APet Name: ${formData.petName}%0ABreed: ${formData.petBreed || 'Not specified'}%0A%0A*Selected Services*%0A${servicesText}%0A*Total Amount: ₹${formData.totalPrice}*${savingsText}%0A*Appointment Request*%0ADate: ${formattedDate}%0ATime: ${timeFormatted}%0A%0A*Additional Notes:*%0A${formData.notes || 'None'}%0A%0APlease confirm this appointment. Thank you! 🐕🐈`;
+            
+            const whatsappNumber = '917600243900';
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            // Open WhatsApp after a short delay
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1000);
+        }
     </script>
 </body>
 </html>
