@@ -6,17 +6,6 @@
     <title>Cuddles & Bubbles | Premium Pet Grooming Services 🐾</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fredoka+One:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-I'll rewrite the code with increased background image opacity and add more animations. Here's the enhanced version:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuddles & Bubbles | Premium Pet Grooming Services 🐾</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fredoka+One:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
     :root {
       /* Color variables */
@@ -330,10 +319,10 @@ I'll rewrite the code with increased background image opacity and add more anima
     .hero__title {
       font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 800;
-      color: var(--pet-dark);
+      color: var(--pet-cream);
       margin-bottom: var(--space-sm);
       line-height: 1.2;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      text-shadow: 1px 1px 3px rgb(243, 243, 244);
       animation: textGlow 3s ease-in-out infinite alternate;
     }
 
@@ -345,7 +334,7 @@ I'll rewrite the code with increased background image opacity and add more anima
 
     .hero__subtitle {
       font-size: 1.25rem;
-      color: var(--pet-dark);
+      color: var(--pet-cream);
       margin-bottom: var(--space-lg);
       max-width: 600px;
       margin-left: auto;
@@ -534,6 +523,109 @@ I'll rewrite the code with increased background image opacity and add more anima
       animation: bounce 2s infinite;
     }
 
+    /* Service Selection Panel - New */
+    .service-selection-panel {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      margin: var(--space-xl) 0;
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--pet-orange);
+    }
+
+    .service-selection-header {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .service-selection-title {
+      font-size: 1.75rem;
+      color: var(--pet-orange);
+      margin-bottom: var(--space-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+    }
+
+    .required-asterisk {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .service-checklist {
+      display: grid;
+      gap: var(--space-sm);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .service-checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm);
+      border-radius: var(--radius-md);
+      background: var(--pet-gray-light);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .service-checkbox-item:hover {
+      background: var(--pet-orange-light);
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .service-checkbox-item.selected {
+      background: var(--pet-sky-blue-light);
+      border-color: var(--pet-sky-blue);
+    }
+
+    .service-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--pet-orange);
+      border-radius: var(--radius-sm);
+      background: white;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .service-checkbox.checked {
+      background: var(--pet-orange);
+    }
+
+    .service-checkbox.checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .service-name-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+    }
+
+    .service-item-name {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .service-item-price {
+      font-weight: 600;
+      color: var(--pet-orange);
+      font-size: 1.1rem;
+    }
+
     /* Service Highlight */
     .service-highlight {
       background: var(--pet-cream);
@@ -709,47 +801,74 @@ I'll rewrite the code with increased background image opacity and add more anima
       color: var(--pet-orange);
     }
 
-    /* Cat Services */
-    .cat-services {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* COMBO SERVICES SPECIAL STYLING - NEW */
+    .combo-service-item {
+      background: linear-gradient(135deg, #FFE4B5 0%, #FFF8DC 100%);
+      border: 2px solid var(--pet-gold);
+      position: relative;
     }
 
+    .combo-service-item::after {
+      content: '⭐ COMBO';
+      position: absolute;
+      top: -8px;
+      right: 8px;
+      background: var(--pet-gold);
+      color: var(--pet-dark);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      animation: comboGlow 2s ease-in-out infinite alternate;
+    }
+
+    .combo-service-item:hover {
+      background: var(--gradient-primary);
+      border-color: var(--pet-orange);
+      transform: translateX(15px) scale(1.05);
+    }
+
+    .combo-service-item:hover .service-price {
+      color: white;
+    }
+
+    /* Cat Package Styles */
     .package-card {
       position: relative;
-      background: var(--pet-cream);
-      border: 2px dashed var(--pet-orange);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border: 3px solid var(--pet-sky-blue);
     }
 
     .package-badge {
       position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--pet-gold);
-      color: var(--pet-dark);
+      top: -2px;
+      right: -2px;
+      background: var(--pet-sky-blue);
+      color: white;
       padding: var(--space-xs) var(--space-sm);
-      border-radius: var(--radius-full);
+      border-bottom-left-radius: var(--radius-lg);
       font-size: 0.75rem;
       font-weight: 600;
       display: flex;
       align-items: center;
       gap: var(--space-xs);
-      white-space: nowrap;
       animation: pulse 2s ease infinite;
     }
 
     .package-content {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
+      margin-top: var(--space-md);
     }
 
     .package-includes {
-      flex: 1;
+      margin-bottom: var(--space-lg);
     }
 
     .package-pricing {
       text-align: center;
+      padding: var(--space-md);
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--pet-sky-blue);
     }
 
     .package-price {
@@ -759,24 +878,24 @@ I'll rewrite the code with increased background image opacity and add more anima
     .price-label {
       display: block;
       font-size: 0.875rem;
-      margin-bottom: var(--space-xs);
+      color: var(--pet-dark);
+      opacity: 0.8;
     }
 
     .price-value {
       font-size: 1.75rem;
       font-weight: 700;
-      color: var(--pet-orange);
-      animation: pulse 2s ease infinite;
+      color: var(--pet-sky-blue);
     }
 
     .savings-badge {
-      background: var(--pet-sky-blue-light);
+      background: var(--pet-gold);
       color: var(--pet-dark);
       padding: var(--space-xs) var(--space-sm);
       border-radius: var(--radius-full);
       font-size: 0.875rem;
       font-weight: 600;
-      animation: float 3s ease-in-out infinite;
+      display: inline-block;
     }
 
     /* Testimonials */
@@ -989,8 +1108,8 @@ I'll rewrite the code with increased background image opacity and add more anima
       background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
     }
 
-    .facebook {
-      background: #1877F2;
+    .youtube {
+      background: #FF0000;
     }
 
     .whatsapp {
@@ -1123,7 +1242,7 @@ I'll rewrite the code with increased background image opacity and add more anima
       visibility: visible;
     }
 
-    .back-to-top:hover {
+    .back-to-top.visible:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
     }
@@ -1183,9 +1302,13 @@ I'll rewrite the code with increased background image opacity and add more anima
       .services-grid {
         grid-template-columns: 1fr;
       }
+
+      .service-checklist {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* Animations */
+    /* Enhanced Animations */
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-15px); }
@@ -1244,6 +1367,18 @@ I'll rewrite the code with increased background image opacity and add more anima
       0% { background-size: 100%; }
       100% { background-size: 120%; }
     }
+
+    /* NEW COMBO GLOW ANIMATION */
+    @keyframes comboGlow {
+      from {
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        transform: scale(1);
+      }
+      to {
+        box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+        transform: scale(1.05);
+      }
+    }
    </style>
 
 </head>
@@ -1254,7 +1389,7 @@ I'll rewrite the code with increased background image opacity and add more anima
             <div class="nav__brand">
                 <h1 class="nav__title">
                     <span class="brand-emoji">🐾</span>
-                    cuddlesnbubbles
+                    CUDDLES N' BUBBLES
                 </h1>
                 <p class="nav__tagline">Premium Pet Grooming</p>
             </div>
@@ -1297,11 +1432,11 @@ I'll rewrite the code with increased background image opacity and add more anima
         </nav>
     </header>
 
-    <!-- Hero Section - Redesigned -->
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero__content">
             <h1 class="hero__title">
-                Cuddles & Bubbles<br>
+                CUDDLES N' BUBBLES<br>
                 <span>Premium At-Home Pet Grooming Services</span>
             </h1>
             <p class="hero__subtitle">
@@ -1362,7 +1497,7 @@ I'll rewrite the code with increased background image opacity and add more anima
                     <div class="stat__label">Years Experience</div>
                 </div>
             </div>
-            
+
             <!-- Dog Services -->
             <div class="service-category">
                 <div class="category-header">
@@ -1393,22 +1528,22 @@ I'll rewrite the code with increased background image opacity and add more anima
                     <div class="pricing-grid">
                         <div class="pricing-card">
                             <div class="pricing-header">Small Dogs 🐕‍🦺</div>
-                            <div class="pricing-value">₹1,250</div>
+                            <div class="pricing-value">₹1,600</div>
                         </div>
                         <div class="pricing-card">
                             <div class="pricing-header">Medium Dogs 🐩</div>
-                            <div class="pricing-value">₹1,350</div>
+                            <div class="pricing-value">₹1,700</div>
                         </div>
                         <div class="pricing-card">
                             <div class="pricing-header">Large Dogs 🦮</div>
-                            <div class="pricing-value">₹1,450</div>
+                            <div class="pricing-value">₹1,800</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Individual Dog Services -->
+                <!-- Individual Dog Services with COMBO SERVICES -->
                 <div class="individual-services">
-                    <h4 class="individual-title">Individual Services</h4>
+                    <h4 class="individual-title">Individual Services & Combos</h4>
                     <div class="services-grid">
                         <!-- Small Dogs -->
                         <div class="service-card">
@@ -1419,6 +1554,17 @@ I'll rewrite the code with increased background image opacity and add more anima
                                 </h5>
                             </div>
                             <div class="service-list">
+                                <!-- NEW COMBO SERVICES -->
+                                <div class="service-item combo-service-item">
+                                    <span class="service-name">Hair + Bath Combo 🛁✂️</span>
+                                    <span class="service-price">₹1,200</span>
+                                </div>
+                                <div class="service-item combo-service-item">
+                                    <span class="service-name">Full Grooming Combo 💎</span>
+                                    <span class="service-price">₹1,600</span>
+                                </div>
+                                
+                                <!-- Individual Services -->
                                 <div class="service-item">
                                     <span class="service-name">Regular Bath 🛁</span>
                                     <span class="service-price">₹800</span>
@@ -1437,18 +1583,18 @@ I'll rewrite the code with increased background image opacity and add more anima
                                 </div>
                                 <div class="service-item">
                                     <span class="service-name">Ear Cleaning 👂</span>
-                                    <span class="service-price">₹50</span>
+                                    <span class="service-price">₹100</span>
                                 </div>
                                 <div class="service-item">
                                     <span class="service-name">Tooth Cleaning 🦷</span>
                                     <span class="service-price">₹150</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Nail Clipping 💅</span>
+                                    <span class="service-name">Nail Cut/Grinding 💅</span>
                                     <span class="service-price">₹150</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Haircut ✂️</span>
+                                    <span class="service-name">Hygiene Cut ✂️</span>
                                     <span class="service-price">₹300</span>
                                 </div>
                             </div>
@@ -1463,6 +1609,17 @@ I'll rewrite the code with increased background image opacity and add more anima
                                 </h5>
                             </div>
                             <div class="service-list">
+                                <!-- NEW COMBO SERVICES -->
+                                <div class="service-item combo-service-item">
+                                    <span class="service-name">Hair + Bath Combo 🛁✂️</span>
+                                    <span class="service-price">₹1,300</span>
+                                </div>
+                                <div class="service-item combo-service-item">
+                                    <span class="service-name">Full Grooming Combo 💎</span>
+                                    <span class="service-price">₹1,700</span>
+                                </div>
+                                
+                                <!-- Individual Services -->
                                 <div class="service-item">
                                     <span class="service-name">Regular Bath 🛁</span>
                                     <span class="service-price">₹900</span>
@@ -1481,18 +1638,18 @@ I'll rewrite the code with increased background image opacity and add more anima
                                 </div>
                                 <div class="service-item">
                                     <span class="service-name">Ear Cleaning 👂</span>
-                                    <span class="service-price">₹50</span>
+                                    <span class="service-price">₹100</span>
                                 </div>
                                 <div class="service-item">
                                     <span class="service-name">Tooth Cleaning 🦷</span>
                                     <span class="service-price">₹150</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Nail Clipping 💅</span>
+                                    <span class="service-name">Nail Cut/Grinding 💅</span>
                                     <span class="service-price">₹150</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Haircut ✂️</span>
+                                    <span class="service-name">Hygiene Cut ✂️</span>
                                     <span class="service-price">₹350</span>
                                 </div>
                             </div>
@@ -1507,17 +1664,28 @@ I'll rewrite the code with increased background image opacity and add more anima
                                 </h5>
                             </div>
                             <div class="service-list">
+                                <!-- NEW COMBO SERVICES -->
+                                <div class="service-item combo-service-item">
+                                    <span class="service-name">Hair + Bath Combo 🛁✂️</span>
+                                    <span class="service-price">₹1,400</span>
+                                </div>
+                                <div class="service-item combo-service-item">
+                                    <span class="service-name">Full Grooming Combo 💎</span>
+                                    <span class="service-price">₹1,800</span>
+                                </div>
+                                
+                                <!-- Individual Services -->
                                 <div class="service-item">
                                     <span class="service-name">Regular Bath 🛁</span>
-                                    <span class="service-price">₹1,000</span>
-                                </div>
-                                <div class="service-item">
-                                    <span class="service-name">Medical Bath 💊</span>
                                     <span class="service-price">₹1,200</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Aroma Spa 🌸</span>
+                                    <span class="service-name">Medical Bath 💊</span>
                                     <span class="service-price">₹1,300</span>
+                                </div>
+                                <div class="service-item">
+                                    <span class="service-name">Aroma Spa 🌸</span>
+                                    <span class="service-price">₹1,600</span>
                                 </div>
                                 <div class="service-item">
                                     <span class="service-name">Tick Removal 🐛</span>
@@ -1532,12 +1700,12 @@ I'll rewrite the code with increased background image opacity and add more anima
                                     <span class="service-price">₹200</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Nail Clipping 💅</span>
+                                    <span class="service-name">Nail Cut/Grinding 💅</span>
                                     <span class="service-price">₹150</span>
                                 </div>
                                 <div class="service-item">
-                                    <span class="service-name">Haircut ✂️</span>
-                                    <span class="service-price">₹400</span>
+                                    <span class="service-name">Hygiene Cut ✂️</span>
+                                    <span class="service-price">₹300</span>
                                 </div>
                             </div>
                         </div>
@@ -1570,11 +1738,11 @@ I'll rewrite the code with increased background image opacity and add more anima
                             </div>
                             <div class="service-item">
                                 <span class="service-name">Medical Bath 💊</span>
-                                <span class="service-price">₹1,100</span>
+                                <span class="service-price">₹1,000</span>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">Aroma Spa 🌸</span>
-                                <span class="service-price">₹1,400</span>
+                                <span class="service-price">₹1,100</span>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">Tick Removal 🐛</span>
@@ -1582,7 +1750,7 @@ I'll rewrite the code with increased background image opacity and add more anima
                             </div>
                             <div class="service-item">
                                 <span class="service-name">Ear Cleaning 👂</span>
-                                <span class="service-price">₹50</span>
+                                <span class="service-price">₹100</span>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">Tooth Cleaning 🦷</span>
@@ -1593,7 +1761,7 @@ I'll rewrite the code with increased background image opacity and add more anima
                                 <span class="service-price">₹500</span>
                             </div>
                             <div class="service-item">
-                                <span class="service-name">Nail Clipping 💅</span>
+                                <span class="service-name">Nail Cut/Grinding 💅</span>
                                 <span class="service-price">₹300</span>
                             </div>
                         </div>
@@ -1626,7 +1794,7 @@ I'll rewrite the code with increased background image opacity and add more anima
                             <div class="package-pricing">
                                 <div class="package-price">
                                     <span class="price-label">Complete Package:</span>
-                                    <span class="price-value">₹1,450</span>
+                                    <span class="price-value">₹1,600</span>
                                 </div>
                                 <div class="savings-badge">
                                     <span class="savings-text">💰 Save ₹250!</span>
@@ -1765,8 +1933,8 @@ I'll rewrite the code with increased background image opacity and add more anima
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h4 class="contact-title">Visit Us</h4>
-                        <p class="contact-info">Punjab, Ludhiana</p>
+                        <h4 class="contact-title">Area of Service</h4>
+                        <p class="contact-info">ALL around , via the van</p>
                         <div class="contact-hours">
                             <p><strong>Mon-Sat:</strong> 9AM - 7PM</p>
                             <p><strong>Sunday:</strong> 10AM - 5PM</p>
@@ -1775,21 +1943,53 @@ I'll rewrite the code with increased background image opacity and add more anima
                 </div>
 
                 <div class="social-section">
-                    <h3 class="social-title">Follow Us</h3>
+                    <h3 class="social-title">Follow Us & Book Online</h3>
                     <div class="social-links">
                         <a href="https://www.instagram.com/cuddlesnbubbles_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn instagram">
                             <i class="fab fa-instagram"></i>
                             Instagram
                         </a>
-                        <a href="https://www.facebook.com/humtumaurpoonch" target="_blank" class="social-btn facebook">
-                            <i class="fab fa-facebook-f"></i>
-                            Facebook
+                        <a href="https://www.youtube.com/@cuddlesnbubbles" target="_blank" class="social-btn youtube">
+                            <i class="fab fa-youtube"></i>
+                            YouTube
                         </a>
                         <a href="https://wa.me/917600243900" target="_blank" class="social-btn whatsapp">
                             <i class="fab fa-whatsapp"></i>
-                            WhatsApp
+                            WhatsApp Book
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Section -->
+    <section id="book" class="contact" style="background: var(--gradient-primary);">
+        <div class="container">
+            <div class="contact__content">
+                <div class="section-header">
+                    <div class="section-badge" style="background: white; color: var(--pet-orange);">
+                        <span class="badge-icon">📅</span>
+                        Book Appointment
+                    </div>
+                    <h2 class="section-title" style="color: white;">
+                        Book Your Pet's Grooming Session
+                        <span class="title-decoration">🎉</span>
+                    </h2>
+                    <p class="section-subtitle" style="color: white; opacity: 0.9;">
+                        Easy online booking - Choose your services and schedule your appointment
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="tel:+917600243900" class="hero__cta" style="background: white; color: var(--pet-orange); margin: 0 1rem 1rem 0;">
+                        <i class="fas fa-phone"></i>
+                        Call to Book
+                    </a>
+                    <a href="https://wa.me/917600243900" class="hero__cta" style="background: #25D366; margin: 0 1rem 1rem 0;">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp Book
+                    </a>
                 </div>
             </div>
         </div>
@@ -1802,7 +2002,7 @@ I'll rewrite the code with increased background image opacity and add more anima
                 <div class="footer__brand">
                     <h3 class="footer__title">
                         <span class="brand-emoji">🐾</span>
-                        cuddlesnbubbles
+                        CUDDLES N' BUBBLES
                     </h3>
                     <p class="footer__tagline">Premium Pet Grooming Services</p>
                     <p class="footer__description">
@@ -1839,7 +2039,7 @@ I'll rewrite the code with increased background image opacity and add more anima
             
             <div class="footer__bottom">
                 <p class="footer__copyright">
-                    &copy; 2025 cuddlesnbubbles . All Rights Reserved. Made with 💖 for pets and their families.
+                    &copy; 2025 CUDDLES N' BUBBLES. All Rights Reserved. Made with 💖 for pets and their families.
                 </p>
             </div>
         </div>
@@ -1851,6 +2051,20 @@ I'll rewrite the code with increased background image opacity and add more anima
     </button>
 
     <script>
+        // Service selection functionality
+        function toggleService(element) {
+            const checkbox = element.querySelector('.service-checkbox');
+            const isChecked = checkbox.classList.contains('checked');
+            
+            if (isChecked) {
+                checkbox.classList.remove('checked');
+                element.classList.remove('selected');
+            } else {
+                checkbox.classList.add('checked');
+                element.classList.add('selected');
+            }
+        }
+
         // Mobile Navigation Toggle
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
@@ -1912,6 +2126,7 @@ I'll rewrite the code with increased background image opacity and add more anima
                 }
             });
         });
+        
     </script>
 </body>
 </html>
